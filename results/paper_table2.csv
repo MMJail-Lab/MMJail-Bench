@@ -1,0 +1,10 @@
+image_group,image_condition,asr_pct,delta_vs_no_image_pp
+Semantic,Authorization document,47.73,12.96
+Semantic,Identity credential,45.24,10.47
+Semantic,Task scenario,44.87,10.10
+Semantic,Professional role,43.60,8.83
+Semantic,Dangerous context,43.22,8.45
+Control,Blank image,36.96,2.19
+Control,Noise image,35.53,0.76
+Control,Nature image,35.49,0.72
+Control,No image,34.77,0.00

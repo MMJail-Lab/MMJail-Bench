@@ -1,6 +1,6 @@
 # Benchmark design
 
-MM-JailBench measures robustness to visual semantic camouflage and cross-modal instruction delivery. The underlying harmful intent is held fixed while the prompt template, semantic image, and carrier are varied.
+MMJailBench is a factorized benchmark for disentangling multimodal jailbreak vulnerabilities, including prompt-framing, visual-semantic, and carrier effects. See the [paper](https://arxiv.org/abs/2608.25490v1). The underlying harmful intent is held fixed while the prompt template, semantic image, and carrier are varied.
 
 ## Controlled factors
 
@@ -11,7 +11,7 @@ MM-JailBench measures robustness to visual semantic camouflage and cross-modal i
 | Image | auth_doc, danger, id_card, role, scenario | 5 |
 | Carrier | text, ocr | 2 |
 
-The full cross product is 16,320 evaluation instances per model. The two historical manifests, p1 and p2, each contain 8,160 rows. Their carrier assignments are complementary: together they evaluate every intent–prompt–image cell once as Text and once as OCR.
+The full cross product is 16,320 evaluation instances per model. In the archived implementation, the two historical manifests, p1 and p2, each contain 8,160 rows. Their carrier assignments are complementary: together they evaluate every intent–prompt–image cell once as Text and once as OCR.
 
 Semantic images are reused across prompt templates. The complete design references 1,360 semantic images (272 × 5). OCR conditions horizontally concatenate an instruction rendering with the corresponding semantic image.
 
@@ -41,10 +41,10 @@ The complete benchmark compares these five semantic conditions. To distinguish s
 - **Lite:** fixed seed62 split; 1,500 instances comprising 750 matched carrier pairs, 259 intents, all 9 domains and 18 scenarios, and every prompt and image level. Lite is intended for broad regression screening. Its visual-type ordering is less stable than its aggregate model/carrier results.
 - **Reviewer subset:** 180 p2 construction-stage records from six intents, with 88 Text and 92 OCR assignments and 30 semantic images. This is a compact reproduction supplement and is not the Lite split.
 
-These manifests are evaluation resources. Lite overlaps Full and must not be treated as an independent held-out test set. The reviewed construction seed is 42; the Lite selection seed62 is a separate choice.
+The selection seed, exact archived intent coverage, p1/p2 filenames, and 180-row reviewer supplement are implementation metadata, additional to the paper's Full/Lite description. These manifests are evaluation resources. Lite overlaps Full and must not be treated as an independent held-out test set. The reviewed construction seed is 42; the Lite selection seed62 is a separate choice.
 
 ## Scope of interpretation
 
 The benchmark evaluates a specified set of harmful intents, presentation factors, models, and generation settings. It does not measure general helpfulness or certify real-world safety. API endpoints can change, and results from different versions or decoding settings should be labeled separately.
 
-The paper's mechanism diagnostics use a selected, outcome-conditioned Gemma3 cohort. They provide conditional, correlational evidence rather than a population-wide causal account. Mechanism scripts and a benchmark-specific judge checkpoint are outside this initial GitHub release.
+The paper's mechanism diagnostics use a selected, outcome-conditioned Gemma3 cohort. They provide conditional, correlational evidence rather than a population-wide causal account. Appendix B.4 describes a lightweight judge based on **Qwen3-8B**. Mechanism scripts, the judge-training pipeline, and the benchmark-specific judge checkpoint are outside this initial GitHub release.

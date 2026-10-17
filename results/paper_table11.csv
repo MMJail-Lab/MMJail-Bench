@@ -1,0 +1,8 @@
+measure,reported_result
+Mean ASR difference (Light − Full),−0.06%
+95% CI for ASR difference,"[−0.45%, 0.30%]"
+Mean absolute ASR difference,0.79%
+Maximum absolute ASR difference,3.53%
+Cells within 2% difference,30/32 (93.75%)
+Spearman ρ,0.997
+Lin’s concordance correlation,0.999

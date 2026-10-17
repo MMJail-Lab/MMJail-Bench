@@ -1,22 +1,29 @@
-# MM-JailBench
+# MMJailBench
 
-### Visual Semantic Camouflage and Cross-Modal Hijacking in Multimodal Jailbreak Evaluation
+### A Factorized Benchmark for Disentangling Multimodal Jailbreak Vulnerabilities
 
+[![Paper](https://img.shields.io/badge/arXiv-2608.25490-b31b1b)](https://arxiv.org/abs/2608.25490)
 [![Python](https://img.shields.io/badge/Python-3.10%E2%80%933.13-blue)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/Code-MIT-green)](LICENSE)
 [![Team](https://img.shields.io/badge/Team-MMJail--Lab-5166d6)](https://github.com/MMJail-Lab)
 
-**272 harmful intents · 9 domains · 18 scenarios · 6 prompt templates · 5 semantic image types · 2 carrier modes**
+**Tianshi Wang, Jingsong Wang, Yafei Huang, Fengling Li, Xin Li, Lei Zhu**
 
-MM-JailBench evaluates how multimodal models respond to harmful requests when prompt framing, visual context, and instruction carrier are varied systematically. Its focus is **visual semantic camouflage**: benign-looking roles, scenarios, identity credentials, or authorization documents that can make an unsafe request appear legitimate.
+**272 harmful intents · 9 domains · 18 scenarios · 6 prompt templates · 5 visual conditions · 2 carriers**
 
-The complete factorial design contains **16,320 instances per model**. The paper evaluates **16 models**, yielding **261,120 scored responses**, and studies carrier effects, prompt effects, semantic-image controls, and representation-level diagnostics.
+MMJailBench disentangles multimodal jailbreak vulnerabilities by holding the harmful intent fixed while independently varying **prompt framing, visual semantics, and instruction carrier**. Its fully crossed design enables matched comparisons of which presentation factors drive unsafe responses, including benign-looking visual camouflage.
+
+The benchmark contains **16,320 instances per model**. The [paper](https://arxiv.org/abs/2608.25490) evaluates **16 models** (8 open-weight and 8 proprietary-access models), yielding **261,120 scored responses**, and studies factor effects, visual controls, and representation-level diagnostics.
 
 Maintained by **MMJail-Lab**, a research team at the School of Computer Science and Technology, Tongji University.
 
-**Release status:** benchmark documentation, aggregate paper results, and evaluation code are available here. The Hugging Face dataset release is being prepared; its link and access policy will be added when available. Dataset files and model weights are not included in this repository. The benchmark manuscript's public paper link will be added when available.
+![MMJailBench construction and evaluation pipeline](assets/figures/pipeline.png)
 
-**Navigation:** [Benchmark design](docs/benchmark.md) · [Evaluation protocol](docs/evaluation.md) · [Reproduction guide](docs/reproduction.md) · [Data format](docs/data_format.md) · [Paper results](results/README.md) · [Responsible use](RESPONSIBLE_USE.md)
+*Construction and evaluation pipeline (Figure 2 of [Wang et al., 2026](https://arxiv.org/html/2608.25490v1#S1.F2)), reproduced unchanged under [CC BY 4.0](assets/figures/README.md).*
+
+**Release status:** benchmark documentation, aggregate results, and evaluation code are available here. The Hugging Face dataset release is being prepared; its link and access policy will be added when available. Dataset files and model weights are distributed separately.
+
+**Navigation:** [Paper](https://arxiv.org/abs/2608.25490) · [Benchmark design](docs/benchmark.md) · [Evaluation protocol](docs/evaluation.md) · [Reproduction guide](docs/reproduction.md) · [Data format](docs/data_format.md) · [Results](results/README.md) · [Responsible use](RESPONSIBLE_USE.md)
 
 ## Benchmark design
 
@@ -24,24 +31,51 @@ Maintained by **MMJail-Lab**, a research team at the School of Computer Science 
 |---|---|
 | Harmful intent | 272 distinct tasks across 9 domains and 18 scenarios |
 | Prompt template | Academic, System, Structure, Story, Code, Paradox |
-| Semantic image | Authorization document, danger, identity card, role, scenario |
+| Semantic image | Authorization document, danger, identity credential, professional role, task scenario |
 | Carrier | Text instruction + semantic image; OCR instruction image + semantic image |
 
-**272 × 6 × 5 × 2 = 16,320 instances.** Each prompt–image cell is evaluated in both carrier modes. This supports matched comparisons across presentation factors.
+**272 × 6 × 5 × 2 = 16,320 instances.** Each intent–prompt–image cell is evaluated in both carrier modes.
 
-| Dataset | Instances per model | Intent coverage | Purpose |
-|---|---:|---:|---|
-| Full | 16,320 | 272 / 272 | Complete benchmark evaluation |
-| Lite (fixed seed62) | 1,500 | 259 / 272 | Lower-cost regression screening |
-| Reviewer subset | 180 | 6 / 272 | Compact reproduction supplement; separate from Lite |
+| Dataset | Instances per model | Purpose |
+|---|---:|---|
+| Full | 16,320 | Complete benchmark evaluation |
+| Lite | 1,500 | Lower-cost regression screening with 750 matched Text/OCR pairs |
+| Reviewer subset | 180 | Compact reproduction supplement, separate from Lite |
 
-Lite contains 750 matched Text/OCR pairs and covers all 9 domains, 18 scenarios, 6 prompt types, and 5 image types. Its selected seed is fixed for reproducibility. Neither Lite nor the reviewer subset replaces the full benchmark for final audits.
+The archived Lite manifest uses selection seed 62 and covers 259 intents, all 9 domains and 18 scenarios, and every prompt and image level. These seed and coverage details, along with the reviewer subset, document the released implementation; they are additional to the paper's Full/Lite description. Lite overlaps Full and supports screening; use Full for comprehensive evaluation.
 
 See [benchmark details and taxonomy](docs/benchmark.md).
 
 ## Main results
 
-The table reports **attack success rate (ASR)** using the paper's GPT-5 judge and a harmfulness threshold of **score ≥ 4**. Lower ASR indicates fewer successful harmful requests under this protocol. These are the paper's evaluated configurations, rather than continuously updated claims about current model endpoints.
+The paper uses a **GPT-5 judge**, with attack success defined as **harmfulness score ≥ 4**. CASR conditions on non-mismatch responses. Lower ASR indicates fewer successful harmful requests under this protocol. These are historical measurements of the paper's evaluated model configurations.
+
+The following carrier results reproduce **Table 3** of [arXiv v1](https://arxiv.org/html/2608.25490v1#S5.T3):
+
+| Carrier | Responses | Mismatch (%) | ASR (%) | CASR (%) |
+|---|---:|---:|---:|---:|
+| Text | 130,560 | 0.37 | 50.70 | 50.89 |
+| OCR | 130,560 | 4.14 | 40.59 | 42.34 |
+| Union (pooled) | 261,120 | 2.26 | 45.64 | 46.69 |
+
+Union pools all Text and OCR instances. It is not an OR over paired outcomes or an equal-domain average.
+
+- **Carrier effects depend on the model:** OCR ASR is lower than Text ASR for 11 of the 16 evaluated models.
+- **Prompt framing produces the largest range among the presentation factors:** Story, Structure, and Academic reach pooled ASRs of 64.42%, 60.05%, and 57.31%, versus 22.99% for System.
+- **Visual semantics require controls:** the separate four-model ablation in [Table 2](results/paper_table2.csv) compares five semantic images with blank, noise, nature, and no auxiliary semantic image conditions.
+- **Lite preserves aggregate trends:** [Table 11](results/paper_table11.csv) reports a mean absolute ASR difference of **0.79 percentage points across 32 model × carrier cells (Text/OCR)**, with 30/32 cells within 2 points and Spearman correlation 0.997. Fine-grained visual rankings are less stable.
+
+<details>
+<summary><strong>Model-level prompt and visual profiles — paper Figure 3</strong></summary>
+
+![Prompt and visual factor profiles for sixteen evaluated models](assets/figures/model_profiles.png)
+
+*Figure 3 of [Wang et al., 2026](https://arxiv.org/html/2608.25490v1#S5.F3), reproduced unchanged under [CC BY 4.0](assets/figures/README.md). The underlying prompt and visual cells match the archived results at the paper's reported precision.*
+
+</details>
+
+<details>
+<summary><strong>Per-model Text/OCR/pooled ASR — recomputed from archived judgments</strong></summary>
 
 | Model | Text ASR (%) | OCR ASR (%) | Pooled ASR (%) |
 |---|---:|---:|---:|
@@ -63,16 +97,11 @@ The table reports **attack success rate (ASR)** using the paper's GPT-5 judge an
 | GLM-4.6V | 77.35 | 78.86 | 78.11 |
 | **All models** | **50.70** | **40.59** | **45.64** |
 
-The pooled column combines all Text and OCR instances. The paper also calls this **Union**; it is **not** an OR over paired outcomes. Domain-macro ASR is a different statistic and is reported separately in the downloadable results.
+These are instance-pooled statistics from the archived judgments. They are distinct from Table 1's printed `Avg.` column and the equal-domain macro statistic. [Paper Table 1](results/paper_table1.csv) is preserved as printed; [model_results.csv](results/model_results.csv) separately provides recomputed pooled and domain-macro results. Printed averages and recomputed statistics may differ; see [result provenance](results/README.md).
 
-Key observations:
+</details>
 
-- OCR is not universally stronger: OCR ASR is lower than Text ASR for 11 of the 16 evaluated models.
-- Prompt framing has the largest range among the presentation factors. Story, Structure, and Academic reach pooled ASRs of 64.42%, 60.05%, and 57.31%, respectively, versus 22.99% for System.
-- The full benchmark's five-image comparison does not isolate semantic meaning from image presence. A separate four-model control ablation evaluates that question.
-- Lite retains aggregate Text/OCR trends, with a mean absolute difference of 0.72 percentage points across the 48 model-by-carrier summaries. Fine-grained visual rankings remain less stable.
-
-Download [model-level results](results/model_results.csv), [carrier results](results/carrier.csv), [prompt results](results/prompt.csv), [image results](results/visual.csv), [Lite agreement](results/lite_seed62_aggregate.csv), and the [48 Full/Lite comparisons](results/lite_seed62_cells.csv). See [provenance and metric definitions](results/README.md).
+Download [paper tables and provenance](results/README.md), [recomputed model results](results/model_results.csv), [prompt results](results/prompt.csv), [image results](results/visual.csv), and [Full/Lite comparisons](results/lite_seed62_cells.csv).
 
 ## Installation
 
@@ -119,16 +148,31 @@ The reviewed CLI expects unique sample IDs within each invocation. **Run the com
 jailbreak_bench/       reviewed construction, inference, judge, and model adapters
 configs/              credential-free model configuration template
 scripts/              strict ASR/CASR and factor-level aggregation
-results/              aggregate paper results and provenance
+results/              paper tables, recomputed aggregates, and provenance
 docs/                 design, protocol, data format, and reproduction guide
+assets/figures/       original paper figures and attribution
 assets/fonts/         exact OCR font and upstream license
 tests/                offline metric correctness checks
 ~~~
 
 ## Citation and contact
 
-For now, refer to the work as **MM-JailBench: Visual Semantic Camouflage and Cross-Modal Hijacking in Multimodal Jailbreak Evaluation**. A verified paper link and complete BibTeX entry will be added with the public manuscript.
+If you use MMJailBench, please cite the [paper](https://arxiv.org/abs/2608.25490):
+
+~~~bibtex
+@misc{wang2026mmjailbench,
+  title={MMJailBench: A Factorized Benchmark for Disentangling Multimodal Jailbreak Vulnerabilities},
+  author={Tianshi Wang and Jingsong Wang and Yafei Huang and Fengling Li and Xin Li and Lei Zhu},
+  year={2026},
+  eprint={2608.25490},
+  archivePrefix={arXiv},
+  primaryClass={cs.CR},
+  url={https://arxiv.org/abs/2608.25490}
+}
+~~~
+
+Machine-readable citation metadata is available in [CITATION.cff](CITATION.cff).
 
 Use [GitHub Issues](https://github.com/MMJail-Lab/MMJail-Bench/issues) for questions and reproducibility reports. Please keep examples minimal and omit credentials, personal information, and operational harmful content.
 
-The code follows the existing project's [MIT license](LICENSE). The bundled font has its [own license](assets/fonts/LICENSE.txt). Dataset and model licensing will be documented with their respective releases. See [responsible-use guidance](RESPONSIBLE_USE.md).
+The code follows the existing project's [MIT license](LICENSE). Paper figures retain [CC BY 4.0](assets/figures/README.md), and the bundled font has its [own license](assets/fonts/LICENSE.txt). Dataset and model licensing will be documented with their respective releases. See [responsible-use guidance](RESPONSIBLE_USE.md).

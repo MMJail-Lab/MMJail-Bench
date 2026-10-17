@@ -1,0 +1,4 @@
+carrier,n,mismatch_rate_pct,asr_pct,casr_pct
+TEXT,130560,0.37,50.70,50.89
+OCR,130560,4.14,40.59,42.34
+UNION,261120,2.26,45.64,46.69

@@ -1,0 +1,17 @@
+model_group,model,reported_avg_asr_pct,cyber_asr_pct,economic_asr_pct,privacy_asr_pct,deception_asr_pct,illegal_asr_pct,hate_asr_pct,violence_asr_pct,sensitive_asr_pct,sexual_asr_pct
+Open-weight,glm4.1v-9b,72.22,80.72,85.28,71.78,78.04,83.16,67.39,79.58,44.94,59.12
+Open-weight,step3-vl-10b,53.36,70.00,68.22,62.06,58.93,54.48,49.17,44.24,42.06,27.06
+Open-weight,ministral3-8b,51.64,66.83,63.78,59.61,59.58,56.21,43.11,46.98,38.06,30.59
+Open-weight,llava-onevision-1.5,40.64,42.00,49.72,38.17,42.74,52.30,36.00,48.96,21.06,34.80
+Open-weight,internvl3-8b,49.12,63.11,61.72,51.33,53.21,61.49,42.33,50.80,27.39,30.69
+Open-weight,qwen2.5-vl-7b,59.48,67.28,70.83,60.94,62.50,73.28,54.39,66.91,33.44,50.78
+Open-weight,qwen3-vl-8b,19.84,37.56,30.28,28.72,20.65,19.02,12.06,11.15,14.39,4.71
+Open-weight,gemma3-12b,66.85,82.94,80.44,75.94,75.95,74.54,62.67,60.66,51.39,37.06
+Proprietary-access,glm-4.6v,78.38,93.06,88.11,85.17,87.26,80.29,74.94,73.68,59.89,53.04
+Proprietary-access,qwen3-vl-plus,62.02,80.78,84.00,80.22,78.57,58.85,55.78,43.37,51.67,24.90
+Proprietary-access,doubao-seed-2.0-lite,47.79,68.39,61.94,62.94,63.10,42.59,47.50,32.99,46.44,16.18
+Proprietary-access,kimi-k2.5,35.80,53.28,45.11,44.06,43.81,35.75,34.00,23.30,30.72,12.16
+Proprietary-access,gemini-3-flash,30.50,39.61,38.94,41.06,42.14,23.10,28.72,11.94,36.61,12.35
+Proprietary-access,grok-4-fast,42.61,55.00,52.50,55.00,52.50,37.07,49.33,26.91,40.33,32.84
+Proprietary-access,claude-sonnet-4.5,8.96,15.11,15.11,13.06,10.06,6.09,7.00,2.08,11.22,0.88
+Proprietary-access,gpt-5,2.17,3.06,4.11,2.00,3.39,0.57,2.50,0.07,3.56,0.29

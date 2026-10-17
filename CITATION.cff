@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use MMJailBench, please cite the paper below."
+type: software
+title: "MMJailBench evaluation code"
+authors:
+  - name: "MMJail-Lab"
+repository-code: "https://github.com/MMJail-Lab/MMJail-Bench"
+url: "https://github.com/MMJail-Lab/MMJail-Bench"
+license: MIT
+preferred-citation:
+  type: article
+  title: "MMJailBench: A Factorized Benchmark for Disentangling Multimodal Jailbreak Vulnerabilities"
+  authors:
+    - family-names: Wang
+      given-names: Tianshi
+    - family-names: Wang
+      given-names: Jingsong
+    - family-names: Huang
+      given-names: Yafei
+    - family-names: Li
+      given-names: Fengling
+    - family-names: Li
+      given-names: Xin
+    - family-names: Zhu
+      given-names: Lei
+  year: 2026
+  journal: arXiv
+  doi: "10.48550/arXiv.2608.25490"
+  url: "https://arxiv.org/abs/2608.25490"

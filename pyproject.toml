@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "jailbreak-bench"
 version = "1.0.0"
-description = "MM-JailBench: evaluation utilities for visual semantic camouflage and cross-modal jailbreak safety."
+description = "MMJailBench: a factorized benchmark for disentangling multimodal jailbreak vulnerabilities."
 readme = "README.md"
 license = {file = "LICENSE"}
 requires-python = ">=3.10,<3.14"
@@ -31,6 +31,7 @@ local-models = [
 jailbreak-bench = "jailbreak_bench.cli:main"
 
 [project.urls]
+Paper = "https://arxiv.org/abs/2608.25490"
 Repository = "https://github.com/MMJail-Lab/MMJail-Bench"
 Issues = "https://github.com/MMJail-Lab/MMJail-Bench/issues"
 

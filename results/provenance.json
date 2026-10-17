@@ -1,6 +1,6 @@
 {
   "release_date": "2026-10-17",
-  "benchmark": "MM-JailBench",
+  "benchmark": "MMJailBench",
   "repository": "MMJail-Lab/MMJail-Bench",
   "source": "Archived final GPT-5 judgments, both p1 and p2",
   "success_threshold": 4,
@@ -24,7 +24,15 @@
     "intents": 259,
     "model_carrier_comparisons": 48,
     "mean_absolute_asr_delta_pp": 0.7166207107843134,
-    "max_absolute_asr_delta_pp": 3.5269607843137294
+    "max_absolute_asr_delta_pp": 3.5269607843137294,
+    "model_carrier_comparisons_note": "48 includes 16 additional union rows; paper Table 11 uses 32 Text/OCR rows.",
+    "paper_text_ocr_comparison": {
+      "cells": 32,
+      "mean_difference_pp": -0.06043198529411906,
+      "mean_absolute_difference_pp": 0.7915900735294132,
+      "maximum_absolute_difference_pp": 3.5269607843137294,
+      "within_2pp": 30
+    }
   },
   "font_sha256": "674a5e96280c31b866c4c166f9723233d545595d3604b438ff060d0b872e9f98",
   "input_files": [
@@ -220,5 +228,6 @@
       "rows": 8160,
       "sha256": "d74b20d96f88cb712d56d86ba1355a23d504178e56e301a0b2bd2664edfb779b"
     }
-  ]
+  ],
+  "paper_reference": "https://arxiv.org/abs/2608.25490v1"
 }

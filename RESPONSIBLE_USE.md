@@ -1,6 +1,6 @@
 # Responsible use
 
-MM-JailBench supports safety research, controlled adversarial evaluation, and reproducible comparison of multimodal models. Benchmark prompts and responses may include unsafe, offensive, or sensitive content.
+MMJailBench supports safety research, controlled adversarial evaluation, and reproducible comparison of multimodal models. Benchmark prompts and responses may include unsafe, offensive, or sensitive content.
 
 Use evaluation resources in controlled research environments. Apply the relevant model/provider terms, avoid deploying generated harmful material, and protect credentials and personal information in logs and reports.
 

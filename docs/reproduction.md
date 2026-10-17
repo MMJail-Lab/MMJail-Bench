@@ -14,7 +14,7 @@ For local inference, set model path/revision, device/device_map, and precision. 
 
 ## 2. Understand the manifests
 
-The historical filenames used in the experiments are:
+The following historical filenames document the archived implementation; the paper does not prescribe these filenames:
 
 | Purpose | p1 | p2 |
 |---|---|---|
@@ -24,7 +24,7 @@ The historical filenames used in the experiments are:
 
 Each part contains 8,160 records with unique sample IDs. p1 and p2 share the same IDs and swap carrier assignments. The reviewed CLI validates, resumes, and merges using sample_id within one part, so **keep parts separate through inference and judging**.
 
-The build-data command reproduces the paper's **p2** carrier assignment. With the reviewer metadata it yields 180 records; with complete metadata and images it yields 8,160 p2 records. It does not construct a combined 16,320-row manifest or the fixed Lite selection.
+The build-data command reproduces the archived **p2** carrier assignment. With the reviewer metadata it yields 180 records; with complete metadata and images it yields 8,160 p2 records. It does not construct a combined 16,320-row manifest or the fixed Lite selection.
 
 ~~~bash
 python -m jailbreak_bench.cli build-data --task-info data/task_info.jsonl --task-labels data/task_label.jsonl --output data/dataset_base.rebuilt.jsonl

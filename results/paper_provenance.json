@@ -1,0 +1,71 @@
+{
+  "paper_title": "MMJailBench: A Factorized Benchmark for Disentangling Multimodal Jailbreak Vulnerabilities",
+  "authors": [
+    "Tianshi Wang",
+    "Jingsong Wang",
+    "Yafei Huang",
+    "Fengling Li",
+    "Xin Li",
+    "Lei Zhu"
+  ],
+  "arxiv_id": "2608.25490",
+  "version": "v1",
+  "submitted": "2026-08-26",
+  "paper_url": "https://arxiv.org/abs/2608.25490v1",
+  "html_url": "https://arxiv.org/html/2608.25490v1",
+  "pdf_url": "https://arxiv.org/pdf/2608.25490v1",
+  "doi": "10.48550/arXiv.2608.25490",
+  "pdf_sha256": "39cd588c833644ccc87bab0036acca5652ed10eab6aa29432e29feffce38bdac",
+  "paper_license": "CC-BY-4.0",
+  "verified_on": "2026-10-17",
+  "table_policy": "Paper tables are transcribed as printed. Recomputed archived statistics are provided separately; reported averages may differ from recomputation.",
+  "tables": [
+    {
+      "file": "results/paper_table1.csv",
+      "table": 1,
+      "anchor": "S4.T1"
+    },
+    {
+      "file": "results/paper_table2.csv",
+      "table": 2,
+      "anchor": "S5.T2"
+    },
+    {
+      "file": "results/paper_table3.csv",
+      "table": 3,
+      "anchor": "S5.T3"
+    },
+    {
+      "file": "results/paper_table11.csv",
+      "table": 11,
+      "anchor": "A3.T11"
+    },
+    {
+      "file": "results/paper_table12.csv",
+      "table": 12,
+      "anchor": "A3.T12"
+    }
+  ],
+  "profile_verification": {
+    "table1_domain_cells": 144,
+    "table9_prompt_cells": 96,
+    "table10_visual_cells": 80,
+    "mismatches_to_archived_results": 0
+  },
+  "figures": [
+    {
+      "figure": 2,
+      "file": "assets/figures/pipeline.png",
+      "source": "https://arxiv.org/html/2608.25490v1/Figures/fig2.png",
+      "sha256": "99191f4cdc367dc8eb0ccf82a808f7945455e9350ad07382bbbf0a0a882ec439",
+      "modifications": "None"
+    },
+    {
+      "figure": 3,
+      "file": "assets/figures/model_profiles.png",
+      "source": "https://arxiv.org/html/2608.25490v1/Figures/fig3.png",
+      "sha256": "38c303b08248aada3279cf4cd6f990f2ec92bc4337b10ffc1e4ac66eb6ff7786",
+      "modifications": "None"
+    }
+  ]
+}

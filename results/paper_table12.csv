@@ -1,0 +1,3 @@
+evaluation_pair,harmfulness_qwk,delta_asr,mismatch_accuracy,mismatch_macro_f1
+GPT-5 vs. Human Experts,0.97,+0.3%,96.3%,0.85
+Lightweight Judge vs. GPT-5,0.95,−0.4%,99.4%,0.94
