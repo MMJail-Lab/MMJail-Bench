@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jailbreak-bench"
+version = "1.0.0"
+description = "MM-JailBench: evaluation utilities for visual semantic camouflage and cross-modal jailbreak safety."
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10,<3.14"
+dependencies = [
+  "openai==2.38.0",
+  "Pillow==12.1.0",
+  "PyYAML==6.0.3",
+  "tqdm==4.67.3"
+]
+
+[project.optional-dependencies]
+local-models = [
+  "accelerate==1.13.0",
+  "numpy==2.4.3",
+  "torch==2.13.0",
+  "torchvision==0.28.0",
+  "transformers==5.9.0",
+  "qwen-vl-utils==0.0.14",
+  "modelscope==1.34.0"
+]
+
+[project.scripts]
+jailbreak-bench = "jailbreak_bench.cli:main"
+
+[project.urls]
+Repository = "https://github.com/MMJail-Lab/MMJail-Bench"
+Issues = "https://github.com/MMJail-Lab/MMJail-Bench/issues"
+
+[tool.setuptools.packages.find]
+include = ["jailbreak_bench*"]

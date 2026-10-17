@@ -1,0 +1,132 @@
+default_runtime:
+  precision: bf16
+  device: cuda:0
+  device_map: auto
+  gen_config:
+    max_new_tokens: 512
+    min_new_tokens: 0
+    temperature: 0.0
+    top_p: 1.0
+    do_sample: false
+
+victim_models:
+  gen_config:
+    max_new_tokens: 512
+
+judge_models:
+  gen_config:
+    max_new_tokens: 256
+    temperature: 0.0
+    do_sample: false
+
+models:
+  # Open-source victim models in the paper.
+  qwen2.5-vl-7b:
+    type: qwen_vl
+    architecture: qwen2_5
+    path: ${QWEN25_MODEL_PATH:-Qwen/Qwen2.5-VL-7B-Instruct}
+    revision: cc594898137f460bfe9f0759e9844b3ce807cfb5
+    local_files_only: false
+    device: cuda:0
+  qwen3-vl-8b:
+    type: qwen_vl
+    architecture: qwen3
+    path: Qwen/Qwen3-VL-8B-Instruct
+    device: cuda:0
+  gemma3-12b:
+    type: hf_chat_template
+    architecture: gemma3
+    path: google/gemma-3-12b-it
+    device: cuda:0
+  internvl3-8b:
+    type: internvl
+    path: OpenGVLab/InternVL3-8B
+    device: cuda:0
+  glm4.1v-9b:
+    type: hf_chat_template
+    architecture: glm4v
+    path: zai-org/GLM-4.1V-9B-Thinking
+    device: cuda:0
+    gen_config:
+      max_new_tokens: 2048
+  ministral3-8b:
+    type: ministral
+    path: mistralai/Ministral-3-8B-Instruct-2512
+    device: cuda:0
+    device_map: auto
+  llava-onevision-1.5:
+    type: llava_onevision
+    path: lmms-lab/LLaVA-OneVision-1.5-8B-Instruct
+    device: cuda:0
+  step3-vl:
+    type: hf_chat_template
+    architecture: step3
+    path: stepfun-ai/Step3-VL-10B
+    device: cuda:0
+
+  # Frontier victim models. API keys are resolved only by the selected adapter.
+  qwen3-vl-plus:
+    type: openai_compatible
+    path: qwen3-vl-plus
+    api_key_env: DASHSCOPE_API_KEY
+    base_url_env: DASHSCOPE_BASE_URL
+    device: cpu
+    max_workers: 50
+  kimi-k2.5:
+    type: openai_compatible
+    path: kimi-k2.5
+    api_key_env: DASHSCOPE_API_KEY
+    base_url_env: DASHSCOPE_BASE_URL
+    device: cpu
+    max_workers: 50
+  grok-4-fast:
+    type: openai_compatible
+    path: ${GROK_MODEL_ID:-x-ai/grok-4-fast}
+    api_key_env: OPENROUTER_API_KEY
+    base_url_env: OPENROUTER_BASE_URL
+    device: cpu
+    max_workers: 20
+  gpt-5:
+    type: openai_compatible
+    path: ${GPT5_MODEL_ID:-openai/gpt-5}
+    api_key_env: OPENROUTER_API_KEY
+    base_url_env: OPENROUTER_BASE_URL
+    device: cpu
+    max_workers: 20
+  gemini-3-flash:
+    type: openai_compatible
+    path: ${GEMINI_MODEL_ID:-google/gemini-3-flash-preview}
+    api_key_env: OPENROUTER_API_KEY
+    base_url_env: OPENROUTER_BASE_URL
+    device: cpu
+    max_workers: 20
+  claude-sonnet-4.5:
+    type: openai_compatible
+    path: ${CLAUDE_MODEL_ID:-anthropic/claude-sonnet-4.5}
+    api_key_env: OPENROUTER_API_KEY
+    base_url_env: OPENROUTER_BASE_URL
+    device: cpu
+    max_workers: 20
+  glm-4.6v:
+    type: openai_compatible
+    path: ${GLM_MODEL_ID:-glm-4.6v}
+    api_key_env: GLM_API_KEY
+    base_url_env: GLM_BASE_URL
+    device: cpu
+    max_workers: 20
+  doubao-seed-2.0-lite:
+    type: openai_compatible
+    path: ${DOUBAO_MODEL_ID:-doubao-seed-2-0-lite-260215}
+    api_key_env: DOUBAO_API_KEY
+    base_url_env: DOUBAO_BASE_URL
+    device: cpu
+    max_workers: 50
+
+  # Judge used for judge-final-final. Set OPENROUTER_API_KEY before use.
+  gpt-5-judge:
+    type: openai_compatible
+    path: ${GPT5_JUDGE_MODEL_ID:-openai/gpt-5}
+    api_key_env: OPENROUTER_API_KEY
+    base_url_env: OPENROUTER_BASE_URL
+    device: cpu
+    max_workers: 10

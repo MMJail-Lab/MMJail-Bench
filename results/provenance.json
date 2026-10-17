@@ -1,0 +1,224 @@
+{
+  "release_date": "2026-10-17",
+  "benchmark": "MM-JailBench",
+  "repository": "MMJail-Lab/MMJail-Bench",
+  "source": "Archived final GPT-5 judgments, both p1 and p2",
+  "success_threshold": 4,
+  "models": 16,
+  "full_rows": 261120,
+  "rows_per_model": 16320,
+  "aggregates_verified": [
+    "model micro ASR",
+    "equal-domain macro ASR",
+    "carrier",
+    "prompt",
+    "image",
+    "domain"
+  ],
+  "lite": {
+    "file": "muse_light_1500_seed62_20260416.jsonl",
+    "sha256": "bae853e0536d14af10d26f6c13a8aab4a773f5634d8234a31443cd46feb5b6b8",
+    "seed": 62,
+    "rows": 1500,
+    "paired_cells": 750,
+    "intents": 259,
+    "model_carrier_comparisons": 48,
+    "mean_absolute_asr_delta_pp": 0.7166207107843134,
+    "max_absolute_asr_delta_pp": 3.5269607843137294
+  },
+  "font_sha256": "674a5e96280c31b866c4c166f9723233d545595d3604b438ff060d0b872e9f98",
+  "input_files": [
+    {
+      "model": "glm4.1v-9b",
+      "file": "judge_gpt5_p1_glm4.1v-9b.csv",
+      "rows": 8160,
+      "sha256": "0acfa5109fa828201b55185c7ff14dd014741b853c44735ded92aaaff2113434"
+    },
+    {
+      "model": "glm4.1v-9b",
+      "file": "judge_gpt5_p2_glm4.1v-9b.csv",
+      "rows": 8160,
+      "sha256": "3368b7af806d7eb12d5a1db33458b3d76035dea5b78b79f6bab3fdc0a4727e06"
+    },
+    {
+      "model": "step3-vl-10b",
+      "file": "judge_gpt5_p1_step3-vl.csv",
+      "rows": 8160,
+      "sha256": "6d7a27016da9ae6ab0abf246c945a23663232f0d8afa6c1e61b05dc5cb053c78"
+    },
+    {
+      "model": "step3-vl-10b",
+      "file": "judge_gpt5_p2_step3-vl.csv",
+      "rows": 8160,
+      "sha256": "6309de27a3562fd5b34ff75bfa1ff82d823a59ad4cc421e96fc4690c5245a6be"
+    },
+    {
+      "model": "ministral3-8b",
+      "file": "judge_gpt5_p1_ministral3-8b.csv",
+      "rows": 8160,
+      "sha256": "2308e4bc0002041651da0b7ec45e74377c36ba9c2cb202a3e54da0d4ac596b22"
+    },
+    {
+      "model": "ministral3-8b",
+      "file": "judge_gpt5_p2_ministral3-8b.csv",
+      "rows": 8160,
+      "sha256": "73ee3b616ba18411f0f51ccd00abcb1ecf4ed1d52cfb5cd7f1c3d51df18db485"
+    },
+    {
+      "model": "llava-onevision-1.5",
+      "file": "judge_gpt5_p1_llava-onevision-1.5.csv",
+      "rows": 8160,
+      "sha256": "59592d67a6473f67014b0c87831846eb46f9f1bcec73e0b710af24be76f40081"
+    },
+    {
+      "model": "llava-onevision-1.5",
+      "file": "judge_gpt5_p2_llava-onevision-1.5.csv",
+      "rows": 8160,
+      "sha256": "ffe5ebb307c7bede222df7ee24f79f006d1bba1ce6e1b40b975d0553a4720989"
+    },
+    {
+      "model": "internvl3-8b",
+      "file": "judge_gpt5_p1_internvl3-8b.csv",
+      "rows": 8160,
+      "sha256": "58f987a79e52f8d80c0da8c72926e457f6e97a6b96a485cfa78134ae5e00cae6"
+    },
+    {
+      "model": "internvl3-8b",
+      "file": "judge_gpt5_p2_internvl3-8b.csv",
+      "rows": 8160,
+      "sha256": "5a87194a5c4a67387ca8531922698ddbd3ecb9fe9035a3f216c9cb171a24b396"
+    },
+    {
+      "model": "qwen2.5-vl-7b",
+      "file": "judge_gpt5_p1_qwen2.5-vl-7b.csv",
+      "rows": 8160,
+      "sha256": "2941de20870e60b7ce9488c8c5df3095ff9e8c7c2724eb5d8d09b8ab306cbc40"
+    },
+    {
+      "model": "qwen2.5-vl-7b",
+      "file": "judge_gpt5_p2_qwen2.5-vl-7b.csv",
+      "rows": 8160,
+      "sha256": "9936e67a8b7f6e62e2b4b7095cf068d2ddc077f145ad76ad9e2d53a746df4aa3"
+    },
+    {
+      "model": "qwen3-vl-8b",
+      "file": "judge_gpt5_p1_qwen3-vl-8b.csv",
+      "rows": 8160,
+      "sha256": "dd6880c88bc33b70f57e692e91515dadec1b88520e736ecc24d9c64dadfe9ec8"
+    },
+    {
+      "model": "qwen3-vl-8b",
+      "file": "judge_gpt5_p2_qwen3-vl-8b.csv",
+      "rows": 8160,
+      "sha256": "57a0fc5e0b3d398a8500821a160a3738dd6a16c783fc7a6ec98501756373edb9"
+    },
+    {
+      "model": "gemma3-12b",
+      "file": "judge_gpt5_p1_gemma3-12b.csv",
+      "rows": 8160,
+      "sha256": "30509e6e22ac02b3a5430d916fe3b1737ff4d304a6ead99445f651fad074d05e"
+    },
+    {
+      "model": "gemma3-12b",
+      "file": "judge_gpt5_p2_gemma3-12b.csv",
+      "rows": 8160,
+      "sha256": "e16ab57724e58a645c40ca5ae5eb6bf096ab3ab6d65654fe04f8de709fef092f"
+    },
+    {
+      "model": "glm-4.6v",
+      "file": "judge_gpt5_p1_glm-4.6v.csv",
+      "rows": 8160,
+      "sha256": "fd532f488c4cd72e4451bd46fd22cd19c0c7dc92eabe9a4b516a736e4108e310"
+    },
+    {
+      "model": "glm-4.6v",
+      "file": "judge_gpt5_p2_glm-4.6v.csv",
+      "rows": 8160,
+      "sha256": "13e8489112ad455f27fe19ee3ca28656c63be229bee10628a017a96271cbc278"
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "file": "judge_gpt5_p1_qwen3-vl-plus.csv",
+      "rows": 8160,
+      "sha256": "29857074162d02d9134ac8f82bba4114d902c5a21617be6717f09130fbc3163a"
+    },
+    {
+      "model": "qwen3-vl-plus",
+      "file": "judge_gpt5_p2_qwen3-vl-plus.csv",
+      "rows": 8160,
+      "sha256": "09acbedffd0422a8c5dcfc12a396adcb476e1d6bc8466e656b0201590288da97"
+    },
+    {
+      "model": "doubao-seed-2.0-lite",
+      "file": "judge_gpt5_p1_doubao-seed-2.0-lite.csv",
+      "rows": 8160,
+      "sha256": "99156e0964d130595af75e595289abeebdea3a32a93d7eecc26bc9dfbe28a99a"
+    },
+    {
+      "model": "doubao-seed-2.0-lite",
+      "file": "judge_gpt5_p2_doubao-seed-2.0-lite.csv",
+      "rows": 8160,
+      "sha256": "342f72e5ba9b26dc1591fe4a5b5e897954abfaa9a16b0908a8ffda9de2b91e1d"
+    },
+    {
+      "model": "kimi-k2.5",
+      "file": "judge_gpt5_p1_kimi-k2.5.csv",
+      "rows": 8160,
+      "sha256": "d87c7b4088ee999aa5c9e143c7955109871f788f8a0aef906cb143fbeeba028f"
+    },
+    {
+      "model": "kimi-k2.5",
+      "file": "judge_gpt5_p2_kimi-k2.5.csv",
+      "rows": 8160,
+      "sha256": "73106de40b9154d05c2cad30300d377ccc13fe832394bd8f0b8504920060e1b1"
+    },
+    {
+      "model": "gemini-3-flash",
+      "file": "judge_gpt5_p1_gemini-3-flash.csv",
+      "rows": 8160,
+      "sha256": "ed7dbf515217b6a5f9bed5228704653496084376eeb3f80727627553bc8159fd"
+    },
+    {
+      "model": "gemini-3-flash",
+      "file": "judge_gpt5_p2_gemini-3-flash.csv",
+      "rows": 8160,
+      "sha256": "a82fb42d58a439ff0c702dfd18249c14a9ce21fea89d05079906a761ce11048d"
+    },
+    {
+      "model": "grok-4-fast",
+      "file": "judge_gpt5_p1_grok-4-fast.csv",
+      "rows": 8160,
+      "sha256": "5d6c212cef069d764edd82a77a4f845a27a5ba9eac95d18f8b7e510298bbaeb2"
+    },
+    {
+      "model": "grok-4-fast",
+      "file": "judge_gpt5_p2_grok-4-fast.csv",
+      "rows": 8160,
+      "sha256": "690c59c81fed84a8ccfcd2df9ef5ad28c13166b5f9f37cfc9f7d46791c974ff4"
+    },
+    {
+      "model": "claude-sonnet-4.5",
+      "file": "judge_gpt5_p1_claude-sonnet-4.5.csv",
+      "rows": 8160,
+      "sha256": "083e2525381ab454e4a74731390e7e2a6176f9a060e7bd9343f89340f4a93559"
+    },
+    {
+      "model": "claude-sonnet-4.5",
+      "file": "judge_gpt5_p2_claude-sonnet-4.5.csv",
+      "rows": 8160,
+      "sha256": "57f91399eec30056a9679b1d8252496d08d333a4d550ebc1fbc284e78b1f4eda"
+    },
+    {
+      "model": "gpt-5",
+      "file": "judge_gpt5_p1_gpt-5.csv",
+      "rows": 8160,
+      "sha256": "839663dd4158526be84ed34992ce14e2298d9f0d249b5419c8c40148f00b8aa5"
+    },
+    {
+      "model": "gpt-5",
+      "file": "judge_gpt5_p2_gpt-5.csv",
+      "rows": 8160,
+      "sha256": "d74b20d96f88cb712d56d86ba1355a23d504178e56e301a0b2bd2664edfb779b"
+    }
+  ]
+}

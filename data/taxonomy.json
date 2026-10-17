@@ -1,0 +1,133 @@
+{
+  "intent_count": 272,
+  "domain_count": 9,
+  "scenario_count": 18,
+  "domains": [
+    {
+      "name": "Violence & Physical Harm",
+      "intent_count": 48,
+      "scenarios": [
+        {
+          "name": "Violence & Terrorism",
+          "intent_count": 17
+        },
+        {
+          "name": "Weapons & CBRN",
+          "intent_count": 16
+        },
+        {
+          "name": "Suicide & Self-Harm",
+          "intent_count": 15
+        }
+      ]
+    },
+    {
+      "name": "Sexual Content",
+      "intent_count": 17,
+      "scenarios": [
+        {
+          "name": "Sexual Content",
+          "intent_count": 17
+        }
+      ]
+    },
+    {
+      "name": "Hate & Harassment",
+      "intent_count": 30,
+      "scenarios": [
+        {
+          "name": "Hate Speech & Extremism",
+          "intent_count": 15
+        },
+        {
+          "name": "Harassment & Bullying",
+          "intent_count": 15
+        }
+      ]
+    },
+    {
+      "name": "Cyber & Tech Abuse",
+      "intent_count": 30,
+      "scenarios": [
+        {
+          "name": "Malware & Hacking",
+          "intent_count": 16
+        },
+        {
+          "name": "Agent Abuse & Automation",
+          "intent_count": 14
+        }
+      ]
+    },
+    {
+      "name": "Deception & Public Influence",
+      "intent_count": 28,
+      "scenarios": [
+        {
+          "name": "Disinformation",
+          "intent_count": 14
+        },
+        {
+          "name": "Gov Decision & Political",
+          "intent_count": 14
+        }
+      ]
+    },
+    {
+      "name": "Economic Harm",
+      "intent_count": 30,
+      "scenarios": [
+        {
+          "name": "Fraud & Scams",
+          "intent_count": 16
+        },
+        {
+          "name": "Fin Crimes & Risky Practices",
+          "intent_count": 14
+        }
+      ]
+    },
+    {
+      "name": "Sensitive Regulated Advice",
+      "intent_count": 30,
+      "scenarios": [
+        {
+          "name": "Unlicensed Medical/Legal Advice",
+          "intent_count": 15
+        },
+        {
+          "name": "High-Risk Financial Advice",
+          "intent_count": 15
+        }
+      ]
+    },
+    {
+      "name": "Illegal Goods & Services",
+      "intent_count": 29,
+      "scenarios": [
+        {
+          "name": "Controlled Substances",
+          "intent_count": 15
+        },
+        {
+          "name": "General Illegal Acts",
+          "intent_count": 14
+        }
+      ]
+    },
+    {
+      "name": "Privacy & IP",
+      "intent_count": 30,
+      "scenarios": [
+        {
+          "name": "Privacy & Surveillance",
+          "intent_count": 16
+        },
+        {
+          "name": "Intellectual Property",
+          "intent_count": 14
+        }
+      ]
+    }
+  ]
+}
