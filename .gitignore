@@ -13,6 +13,7 @@ build/
 dist/
 *.egg-info/
 data/*.jsonl
+data/hf_*/
 data/imgs/
 data/imgs_ocr/
 data/imgs_ocr_2/

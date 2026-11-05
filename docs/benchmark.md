@@ -35,13 +35,14 @@ The machine-readable [taxonomy](../data/taxonomy.json) contains category names, 
 
 The complete benchmark compares these five semantic conditions. To distinguish semantic effects from generic image presence, the paper separately evaluates control conditions on four models. Those ablations should not be described as results over all sixteen models.
 
-## Full, Lite, and reviewer subsets
+## Full, current Lite, and historical subsets
 
 - **Full:** 16,320 instances, 272 intents, complete factor coverage.
-- **Lite:** fixed seed62 split; 1,500 instances comprising 750 matched carrier pairs, 259 intents, all 9 domains and 18 scenarios, and every prompt and image level. Lite is intended for broad regression screening. Its visual-type ordering is less stable than its aggregate model/carrier results.
+- **Current Hugging Face Lite-500:** exactly the published 500-row index, in index order; 250 Text and 250 OCR rows; 228 intents, all 9 domains, 18 scenarios, 6 prompt types, and 5 image types. Its 496 distinct sample IDs include only four complete carrier pairs. It is not the paper's Lite-1500 or an independent held-out split.
+- **Historical paper Lite-1500:** fixed seed62 selection; 1,500 instances comprising 750 matched carrier pairs, 259 intents, all 9 domains and 18 scenarios, and every prompt and image level. The paper's Table 11 and archived Full/Lite comparison CSVs concern this historical selection. Their agreement statistics must not be attributed to Lite-500.
 - **Reviewer subset:** 180 p2 construction-stage records from six intents, with 88 Text and 92 OCR assignments and 30 semantic images. This is a compact reproduction supplement and is not the Lite split.
 
-The selection seed, exact archived intent coverage, p1/p2 filenames, and 180-row reviewer supplement are implementation metadata, additional to the paper's Full/Lite description. These manifests are evaluation resources. Lite overlaps Full and must not be treated as an independent held-out test set. The reviewed construction seed is 42; the Lite selection seed62 is a separate choice.
+The selection seed, exact archived intent coverage, p1/p2 filenames, and 180-row reviewer supplement are implementation metadata, additional to the paper's Full/Lite description. These manifests are evaluation resources. Both Lite selections overlap Full and must not be treated as independent held-out test sets. The reviewed construction seed is 42; historical paper Lite's selection seed62 is a separate choice.
 
 ## Scope of interpretation
 

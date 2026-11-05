@@ -3,6 +3,7 @@
 ### A Factorized Benchmark for Disentangling Multimodal Jailbreak Vulnerabilities
 
 [![Paper](https://img.shields.io/badge/arXiv-2608.25490-b31b1b)](https://arxiv.org/abs/2608.25490)
+[![Dataset](https://img.shields.io/badge/Dataset-Hugging%20Face-yellow)](https://huggingface.co/datasets/MMJail-Lab/MMJail-Bench)
 [![Python](https://img.shields.io/badge/Python-3.10%E2%80%933.13-blue)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/Code-MIT-green)](LICENSE)
 [![Team](https://img.shields.io/badge/Team-MMJail--Lab-5166d6)](https://github.com/MMJail-Lab)
@@ -21,7 +22,7 @@ Maintained by **MMJail-Lab**, a research team at the School of Computer Science 
 
 *Construction and evaluation pipeline (Figure 2 of [Wang et al., 2026](https://arxiv.org/html/2608.25490v1#S1.F2)), reproduced unchanged under [CC BY 4.0](assets/figures/README.md).*
 
-**Release status:** benchmark documentation, aggregate results, and evaluation code are available here. The Hugging Face dataset release is being prepared; its link and access policy will be added when available. Dataset files and model weights are distributed separately.
+**Dataset:** [Hugging Face — MMJail-Lab/MMJail-Bench](https://huggingface.co/datasets/MMJail-Lab/MMJail-Bench) provides **Full (16,320)** and **Lite-500 (500)** evaluation inputs with embedded original images under **CC BY 4.0**. Code, aggregate results, and evaluation details are maintained here.
 
 **Navigation:** [Paper](https://arxiv.org/abs/2608.25490) · [Benchmark design](docs/benchmark.md) · [Evaluation protocol](docs/evaluation.md) · [Reproduction guide](docs/reproduction.md) · [Data format](docs/data_format.md) · [Results](results/README.md) · [Responsible use](RESPONSIBLE_USE.md)
 
@@ -39,10 +40,13 @@ Maintained by **MMJail-Lab**, a research team at the School of Computer Science 
 | Dataset | Instances per model | Purpose |
 |---|---:|---|
 | Full | 16,320 | Complete benchmark evaluation |
-| Lite | 1,500 | Lower-cost regression screening with 750 matched Text/OCR pairs |
+| Lite-500 (`lite` on Hugging Face) | 500 | Manifest-defined subset: 250 Text and 250 OCR; 228 intents |
+| Historical paper Lite | 1,500 | Archived selection used for the paper's Full/Lite agreement analysis |
 | Reviewer subset | 180 | Compact reproduction supplement, separate from Lite |
 
-The archived Lite manifest uses selection seed 62 and covers 259 intents, all 9 domains and 18 scenarios, and every prompt and image level. These seed and coverage details, along with the reviewer subset, document the released implementation; they are additional to the paper's Full/Lite description. Lite overlaps Full and supports screening; use Full for comprehensive evaluation.
+**The current Lite-500 release follows its [published index](https://huggingface.co/datasets/MMJail-Lab/MMJail-Bench/blob/main/lite_manifest.csv) exactly.** It covers all 9 domains, 18 scenarios, 6 prompt types, and 5 image types. It is carrier-balanced but mostly unpaired: only four sample IDs have both Text and OCR. It overlaps Full and is not a held-out split.
+
+The historical 1,500-row paper Lite uses seed 62 and 750 matched carrier pairs, covering 259 intents. The paper's Table 11 agreement statistics describe that historical selection, **not Lite-500**. Use Full for comprehensive factor comparisons.
 
 See [benchmark details and taxonomy](docs/benchmark.md).
 
@@ -63,7 +67,7 @@ Union pools all Text and OCR instances. It is not an OR over paired outcomes or 
 - **Carrier effects depend on the model:** OCR ASR is lower than Text ASR for 11 of the 16 evaluated models.
 - **Prompt framing produces the largest range among the presentation factors:** Story, Structure, and Academic reach pooled ASRs of 64.42%, 60.05%, and 57.31%, versus 22.99% for System.
 - **Visual semantics require controls:** the separate four-model ablation in [Table 2](results/paper_table2.csv) compares five semantic images with blank, noise, nature, and no auxiliary semantic image conditions.
-- **Lite preserves aggregate trends:** [Table 11](results/paper_table11.csv) reports a mean absolute ASR difference of **0.79 percentage points across 32 model × carrier cells (Text/OCR)**, with 30/32 cells within 2 points and Spearman correlation 0.997. Fine-grained visual rankings are less stable.
+- **Historical Lite agreement (1,500 rows):** [Table 11](results/paper_table11.csv) reports a mean absolute ASR difference of **0.79 percentage points across 32 model × carrier cells (Text/OCR)**, with 30/32 cells within 2 points and Spearman correlation 0.997. These results are not validation of the current Lite-500 release.
 
 <details>
 <summary><strong>Model-level prompt and visual profiles — paper Figure 3</strong></summary>
@@ -101,7 +105,7 @@ These are instance-pooled statistics from the archived judgments. They are disti
 
 </details>
 
-Download [paper tables and provenance](results/README.md), [recomputed model results](results/model_results.csv), [prompt results](results/prompt.csv), [image results](results/visual.csv), and [Full/Lite comparisons](results/lite_seed62_cells.csv).
+Download [paper tables and provenance](results/README.md), [recomputed model results](results/model_results.csv), [prompt results](results/prompt.csv), [image results](results/visual.csv), and [historical Lite-1500 comparisons](results/lite_seed62_cells.csv).
 
 ## Installation
 
@@ -128,7 +132,18 @@ The pinned dependencies record the reproduction environment. GPU/CUDA compatibil
 
 ## Evaluation workflow
 
-The code supports dataset validation, OCR rendering, local/API victim inference, GPT-5 judging, and result aggregation. **Inference commands require benchmark data obtained separately.** Until the data release is available, installation and result inspection can be used independently.
+The code supports dataset validation, OCR rendering, local/API victim inference, GPT-5 judging, and result aggregation. Load the image-embedded Hugging Face data directly, or export it for the reviewed CLI:
+
+~~~bash
+pip install datasets pillow
+python scripts/export_hf_dataset.py --config lite --output data/hf_lite
+python -m jailbreak_bench.cli validate --dataset data/hf_lite/dataset_text.jsonl --data-root data/hf_lite --stage final
+python -m jailbreak_bench.cli validate --dataset data/hf_lite/dataset_ocr.jsonl --data-root data/hf_lite --stage final
+~~~
+
+Use `--config full` for Full. **Text uses `prompt`; OCR has an empty `prompt` and sends only the stitched image.** `reference_prompt` and the exported `judge_prompts.jsonl` are judge inputs only. Do not send them as OCR victim text. See [download and inference commands](docs/reproduction.md).
+
+For separately supplied legacy manifests, the command structure is:
 
 ~~~bash
 # Once dataset files are available under data/:
@@ -175,4 +190,4 @@ Machine-readable citation metadata is available in [CITATION.cff](CITATION.cff).
 
 Use [GitHub Issues](https://github.com/MMJail-Lab/MMJail-Bench/issues) for questions and reproducibility reports. Please keep examples minimal and omit credentials, personal information, and operational harmful content.
 
-The code follows the existing project's [MIT license](LICENSE). Paper figures retain [CC BY 4.0](assets/figures/README.md), and the bundled font has its [own license](assets/fonts/LICENSE.txt). Dataset and model licensing will be documented with their respective releases. See [responsible-use guidance](RESPONSIBLE_USE.md).
+The code follows the existing project's [MIT license](LICENSE). Paper figures retain [CC BY 4.0](assets/figures/README.md), and the bundled font has its [own license](assets/fonts/LICENSE.txt). The [dataset](https://huggingface.co/datasets/MMJail-Lab/MMJail-Bench) uses CC BY 4.0; model checkpoints retain their providers' terms. See [responsible-use guidance](RESPONSIBLE_USE.md).

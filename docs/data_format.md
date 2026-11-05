@@ -2,6 +2,14 @@
 
 Dataset files are JSON Lines with UTF-8 encoding. The schema is shared by the reviewed construction, OCR rendering, inference, and judging utilities. Actual prompts and images are distributed separately.
 
+## Hugging Face release
+
+The `full` and `lite` configurations contain 16,320 and 500 rows respectively, each with a `test` split. They use flat Parquet fields: `id`, `sample_id`, task metadata, factor labels, `prompt`, `reference_prompt`, `image_path`, `source_part`, and an embedded `image` feature.
+
+`prompt` is the actual victim text input: the original instruction for Text and exactly `""` for OCR. `reference_prompt` is judge-only and must not be appended to OCR victim inputs. `image` is the actual semantic or stitched OCR image. `id` includes the carrier; the raw `sample_id` does not.
+
+[scripts/export_hf_dataset.py](../scripts/export_hf_dataset.py) exports the flat data into the nested schema below, materializes original PNG bytes, and partitions final manifests by carrier. It also writes a unique-sample `judge_prompts.jsonl` with nonempty original requests. This reference file is for judging only, not construction or OCR rebuilding.
+
 ## Record fields
 
 | Field | Type | Meaning |

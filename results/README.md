@@ -34,7 +34,9 @@ Full results use final GPT-5 judgments for both historical manifests (p1 and p2)
 
 **Union means pooled Text/OCR instances.** A model's pooled ASR is not its equal-domain macro ASR. In the balanced full design, pooling equals the average of that model's Text and OCR ASRs before rounding.
 
-## Lite comparison denominator
+## Historical Lite-1500 comparison denominator
+
+The current Hugging Face `lite` configuration contains 500 manifest-selected rows. It is a different subset; the following historical agreement statistics do not validate Lite-500.
 
 The paper's Table 11 compares **16 models × 2 carriers = 32 cells**. Filtering `lite_seed62_cells.csv` to `carrier == text` or `carrier == ocr` reproduces the mean difference −0.06 percentage points, mean absolute difference **0.79 points**, maximum absolute difference 3.53 points, and 30/32 cells within 2 points.
 

@@ -42,7 +42,7 @@ Let N be the number of evaluated, validly judged instances, S the number with sc
 
 CASR is conditional on non-mismatch inputs. It complements ASR and does not replace it. If every row is a mismatch, CASR is undefined and the summarizer outputs JSON null.
 
-**Union / pooled ASR** aggregates all Text and OCR instances. It is not the fraction of pairs for which either carrier succeeds, a best-of-two statistic, or an average over the nine domains. Full has 8,160 instances per carrier; Lite has 750 per carrier.
+**Union / pooled ASR** aggregates all Text and OCR instances. It is not the fraction of pairs for which either carrier succeeds, a best-of-two statistic, or an average over the nine domains. Full has 8,160 instances per carrier; the current Lite-500 has 250 per carrier. The historical paper Lite-1500 has 750 per carrier.
 
 For published comparisons, distinguish the paper's printed table values from archived recomputation; see [results and provenance](../results/README.md).
 
@@ -58,4 +58,4 @@ The JSON report includes pooled metrics and breakdowns by carrier, category, pro
 
 The summarizer rejects missing metadata, unsupported carriers, non-integer/out-of-range scores, malformed mismatch flags, and mismatches with a score other than 1. Inference or parsing errors (including score −1) must be resolved before reporting benchmark metrics. Do not silently count errors as refusals or drop them from the denominator.
 
-Check expected coverage before interpreting a run: 16,320 valid rows for Full, 1,500 for Lite, and complete coverage of the intended factors. A valid partial report is not a complete benchmark evaluation. For Full, macro ASR should include all nine domains; macro averages over incomplete domain coverage are not directly comparable.
+Check expected coverage before interpreting a run: 16,320 valid rows for Full, 500 for the current Lite-500 (1,500 for historical paper Lite), and complete coverage of the intended factors. A valid partial report is not a complete benchmark evaluation. For Full, macro ASR should include all nine domains; macro averages over incomplete domain coverage are not directly comparable.

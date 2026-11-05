@@ -1,6 +1,6 @@
 # Reproduction guide
 
-All commands below run from the repository root. Dataset manifests and semantic images will be distributed separately; the Hugging Face repository and access policy will be linked when available. This GitHub release does not include those dataset files or a local judge checkpoint.
+All commands below run from the repository root. Evaluation inputs are available on [Hugging Face](https://huggingface.co/datasets/MMJail-Lab/MMJail-Bench) under CC BY 4.0. The GitHub checkout contains code and metadata; images are downloaded separately. A benchmark-specific local judge checkpoint is not included.
 
 ## 1. Install and configure
 
@@ -12,7 +12,27 @@ For an API model, set both the credential variable named by api_key_env and the 
 
 For local inference, set model path/revision, device/device_map, and precision. The Qwen2.5-VL entry records a checkpoint revision. Other entries without revisions require you to record the snapshot actually used. Treat the template as the recorded configuration, rather than a promise that a current API alias matches the paper's evaluated version.
 
-## 2. Understand the manifests
+## 2. Download and run the current Hugging Face data
+
+~~~bash
+pip install datasets pillow
+python scripts/export_hf_dataset.py --config lite --output data/hf_lite
+python -m jailbreak_bench.cli validate --dataset data/hf_lite/dataset_text.jsonl --data-root data/hf_lite --stage final
+python -m jailbreak_bench.cli validate --dataset data/hf_lite/dataset_ocr.jsonl --data-root data/hf_lite --stage final
+python -m jailbreak_bench.cli run-victim --config configs/models.yaml --model qwen2.5-vl-7b --dataset data/hf_lite/dataset_text.jsonl --data-root data/hf_lite --output outputs/victim_text.csv --batch-size 4
+python -m jailbreak_bench.cli run-victim --config configs/models.yaml --model qwen2.5-vl-7b --dataset data/hf_lite/dataset_ocr.jsonl --data-root data/hf_lite --output outputs/victim_ocr.csv --batch-size 4
+python -m jailbreak_bench.cli run-judge --config configs/models.yaml --model gpt-5-judge --prompt-dataset data/hf_lite/judge_prompts.jsonl --input outputs/victim_text.csv --output outputs/judged_text.csv
+python -m jailbreak_bench.cli run-judge --config configs/models.yaml --model gpt-5-judge --prompt-dataset data/hf_lite/judge_prompts.jsonl --input outputs/victim_ocr.csv --output outputs/judged_ocr.csv
+python scripts/summarize_results.py --inputs outputs/judged_text.csv outputs/judged_ocr.csv --output outputs/summary.json
+~~~
+
+Lite produces 250 rows per carrier, 500 combined. For Full use `--config full` and a new output directory, then expect 8,160 rows per carrier and 16,320 combined. The exporter requires an empty destination and writes the original image bytes without retouching.
+
+**Do not inject `reference_prompt` into OCR victim inputs.** The exported OCR manifest has empty prompts; `judge_prompts.jsonl` preserves original requests only for the judge. Keep the Text/OCR files separate through inference because sample IDs can repeat across carriers.
+
+The current Lite-500 follows its published manifest. The paper's historical Lite-1500 consistency results do not apply to this new selection.
+
+## 3. Archived construction manifests
 
 The following historical filenames document the archived implementation; the paper does not prescribe these filenames:
 
@@ -34,9 +54,9 @@ python -m jailbreak_bench.cli validate --dataset data/dataset.rebuilt.jsonl --da
 
 The OCR target directory must be empty and the output manifest must not exist. Original prompts remain in construction-stage records; final OCR records have empty prompt fields. See [data format](data_format.md).
 
-For Lite, the historical 1,500-row manifest contains both carriers with repeated sample IDs. Partition it by carrier before passing it to the reviewed CLI, and use the corresponding original-prompt manifest for judging. Future dataset release instructions will describe the supplied manifests explicitly.
+For Lite, the historical 1,500-row manifest contains both carriers with repeated sample IDs. Partition it by carrier before passing it to the reviewed CLI, and use the corresponding original-prompt manifest for judging. The current Hugging Face exporter already partitions its Full/Lite-500 data by carrier; the historical Lite-1500 manifest is a separate archive artifact.
 
-## 3. Run each part
+## 4. Run each archived part
 
 Example for p1 using Qwen2.5-VL:
 
@@ -50,7 +70,7 @@ Repeat with the p2 manifests and distinct victim_p2.csv / judged_p2.csv output p
 
 The same configuration entries can be selected for API inference. Credentials are resolved by the selected adapter. API inference and judging may incur provider charges.
 
-## 4. Resume or shard a single part
+## 5. Resume or shard a single part
 
 - Use --resume to skip sample IDs already in that part's output.
 - Use --overwrite only when intentionally replacing an output. It is mutually exclusive with --resume.
@@ -65,7 +85,7 @@ python -m jailbreak_bench.cli merge --inputs outputs/p1_rank0.csv outputs/p1_ran
 
 Do not use the default sample_id merge to combine p1 and p2. Aggregate judged parts using the script below instead. Failed rows may already be present in a resumed output; resolve those rows explicitly before aggregation.
 
-## 5. Summarize
+## 6. Summarize archived parts
 
 ~~~bash
 python scripts/summarize_results.py --inputs outputs/judged_p1.csv outputs/judged_p2.csv --output outputs/summary.json

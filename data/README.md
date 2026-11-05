@@ -1,7 +1,7 @@
 # Dataset release
 
-The Hugging Face release is being prepared. This directory currently contains aggregate taxonomy metadata only. It does not contain benchmark prompts, semantic images, OCR carriers, raw responses, or model weights.
+Evaluation inputs are available on [Hugging Face](https://huggingface.co/datasets/MMJail-Lab/MMJail-Bench), with `full` (16,320 rows) and `lite` (500 rows) configurations and embedded original images. This GitHub directory contains aggregate taxonomy metadata; use the exporter in the [reproduction guide](../docs/reproduction.md) to download images and CLI-compatible manifests locally.
 
-The [data-format guide](../docs/data_format.md) documents the expected manifests. The [benchmark guide](../docs/benchmark.md) distinguishes Full (16,320), fixed Lite (1,500), and the separate reviewer subset (180).
+The [data-format guide](../docs/data_format.md) documents Hugging Face fields and CLI manifests. The [benchmark guide](../docs/benchmark.md) distinguishes Full, the current manifest-defined Lite-500, the historical paper Lite-1500, and the reviewer supplement.
 
-Data access terms, licensing, version identifiers, checksums, and download instructions will accompany the dataset release. The code's MIT license does not grant a license to unreleased dataset assets.
+Dataset assets use CC BY 4.0; code uses MIT. Versioned source and image checksums accompany the Hugging Face release. Raw responses, judge reasoning, and model weights are not part of the dataset.
