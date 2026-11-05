@@ -24,6 +24,8 @@ Maintained by **MMJail-Lab**, a research team at the School of Computer Science 
 
 **Dataset:** [Hugging Face — MMJail-Lab/MMJail-Bench](https://huggingface.co/datasets/MMJail-Lab/MMJail-Bench) provides **Full (16,320)** and **Lite-500 (500)** evaluation inputs with embedded original images under **CC BY 4.0**. Code, aggregate results, and evaluation details are maintained here.
 
+**Browse the data:** [Full viewer](https://huggingface.co/datasets/MMJail-Lab/MMJail-Bench/viewer/full/test) · [Lite-500 viewer](https://huggingface.co/datasets/MMJail-Lab/MMJail-Bench/viewer/lite/test). Both show Text and OCR examples with images.
+
 **Navigation:** [Paper](https://arxiv.org/abs/2608.25490) · [Benchmark design](docs/benchmark.md) · [Evaluation protocol](docs/evaluation.md) · [Reproduction guide](docs/reproduction.md) · [Data format](docs/data_format.md) · [Results](results/README.md) · [Responsible use](RESPONSIBLE_USE.md)
 
 ## Benchmark design
